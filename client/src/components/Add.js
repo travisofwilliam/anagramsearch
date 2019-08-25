@@ -1,7 +1,9 @@
 import React from 'react'
 import axios from 'axios'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { Button } from 'reactstrap'
 
-export default class Add extends React.component {
+export default class Add extends React.Component {
   state = {
     wordList: ''
   };
@@ -24,13 +26,15 @@ export default class Add extends React.component {
 
     return (
       <div>
-        <h1>Add words</h1>
-        <form onSubmit={ this.handleSubmit }>
-            <textarea 
-              onChange={e => this.setState({ wordList: e.target.value })}
-              value={wordList}
-            />
-            <button>Add words</button>
+        <h4>Add Words</h4>
+        <p>Add words to your database:</p>
+        <form onSubmit={this.handleSubmit}>
+          <textarea
+            onChange={e => this.setState({ wordList: e.target.value })}
+            value={wordList}
+          />
+          <br />
+          <Button color="primary">Add words</Button>
         </form>
       </div>
     )

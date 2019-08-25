@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { Button } from 'reactstrap'
 import SearchList from './SearchList'
 
 export default class Search extends Component {
@@ -19,7 +21,9 @@ export default class Search extends Component {
     e.preventDefault()
     const { tiles } = this.state
     axios.get(`/api/search/${tiles}`)
-      .then(res => this.setState({ words: res.data }))
+      .then(res => {
+        this.setState({ words: res.data })
+      })
   }
 
   handleDelete = (word) => {
@@ -33,13 +37,18 @@ export default class Search extends Component {
 
     return (
       <div>
+        <h4>Search</h4>
+        <p>Search your database for all anagrams of any given tiles</p>
+        <p>Found words can be deleted from your database</p>
         <form onSubmit={this.handleSubmit}>
           <input
             type="text"
             onChange={e => this.setState({ tiles: e.target.value })}
             value={tiles}
           />
-          <button>Find Words</button>
+          <br />
+          <br />
+          <Button color="primary">Find words</Button>
         </form>
 
         {

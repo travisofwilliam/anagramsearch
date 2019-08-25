@@ -29,13 +29,12 @@ const defaultLetters = {
 
 module.exports.getLetters = word => {
   return Object.keys(defaultLetters).reduce((acc, letter) => {
-    const matcher = new RegExp(letter, 'g')
+    const matcher = new RegExp(letter, 'gi')
     const count = (word.match(matcher) || []).length
 
     if (count > 0) {
       acc[letter] = count
     }
-
     return acc
   }, { ...defaultLetters })
 }
@@ -44,6 +43,8 @@ module.exports.getLettersQuery = tiles => {
   return Object.keys(defaultLetters).reduce((acc, letter) => {
     const matcher = new RegExp(letter, 'g')
     const count = (tiles.match(matcher) || []).length
+
+
 
     if (count > 0) {
       acc.$and.push({
@@ -56,7 +57,6 @@ module.exports.getLettersQuery = tiles => {
         [`letters.${letter}`]: 0
       })
     }
-
     return acc
   }, {
       $and: []
