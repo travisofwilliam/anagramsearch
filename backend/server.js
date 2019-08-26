@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const express = require('express');
+const path = require('path')
 const ApiRouter = require('./api/index')
 
 const app = express()
@@ -10,4 +11,14 @@ mongoose.connect(connectionString, { useNewUrlParser: true })
   .catch(err => console.log(err))
 
 app.use('/api', ApiRouter)
+
+// Serve static assets if in production
+if (process.env.NODE_ENV === 'production') {
+  // Set static folder
+  app.use(express.static('client/build'))
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+  })
+}
 app.listen(3000, () => console.log('Server running on port 3000'))
