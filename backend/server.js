@@ -5,7 +5,7 @@ const ApiRouter = require('./api/index')
 
 const app = express()
 
-const connectionString = 'mongodb://test:abc123@ds261817.mlab.com:61817/anagram'
+const connectionString = process.env.MONGODB_URI || 'mongodb://test:abc123@ds261817.mlab.com:61817/anagram'
 mongoose.connect(connectionString, { useNewUrlParser: true })
   .then(() => console.log('MongoDB connected to database'))
   .catch(err => console.log(err))
