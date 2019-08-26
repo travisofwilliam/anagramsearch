@@ -12,7 +12,8 @@ mongoose.connect(connectionString, { useNewUrlParser: true })
 
 app.use('/api', ApiRouter)
 
-var PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 3000
+const host = '0.0.0.0'
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {
@@ -23,4 +24,4 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
   })
 }
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
+app.listen(PORT, host, () => console.log(`Server running on port ${PORT}`))
